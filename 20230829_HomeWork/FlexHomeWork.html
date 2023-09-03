@@ -1,0 +1,226 @@
+<!--
+    Flex는 1차원으로 수평, 수직 영역 중 하나의 방향으로만 레이아웃을 나눌 수 있다.
+    Grid는 2차원으로 수평, 수직 영역 중 동시에 영역을 나눌 수 있다.
+-->
+
+
+<!--
+    <flex의 속성들은>
+1.컨테이너에 적용하는 속성
+2. 아이템에 적용하는 속성
+두가지로 나뉜다.-->
+
+<!--flex의 속성 중 1. 컨테이너에 적용하는 속성들_display: flex;
+
+.container {
+    display: flex;
+    /*display: inline-flex; */
+}
+
+flex 아이템들은 가로 방향으로 배치되고, 자신의 가진 내용물의 width(가로)만큼만 차지한다.
+-->
+
+<!-- flex의 속성 중 1. 컨테이너에 적용하는 속성들_배치 방향 설정: flex-direction
+
+    .container {
+    flex-direction: row;
+    /* flex-direction: column; */
+    /* flex-direction: row-reverse; */
+    /* flex-direction: column-reverse; */
+}
+
+row는 아이템들이 가로 방향으로 배치된다.
+column은 아이템들이 열(세로)방향으로 배치된다.
+row-reverse는 아이템들이 역순으로 가로 배치된다.
+column-reverse는 아이템들이 역순으로 세로로 배치된다.
+-->
+
+<!-- flex의 속성 중 1. 컨테이너에 적용하는 속성들_줄넘김 처리 설정: flex-wrap
+
+.container {
+    flex-wrap: nowrap;
+    /* flex-wrap: wrap; */
+    /* flex-wrap: wrap-reverse; */
+}
+
+nowrap(기본값)은 배열시 줄바꿈을 하지 않는다. 넘치면 그냥 삐져 나간다.
+wrap은 줄바꿈을 한다. 
+wrap-reverse는 줄바꿈을 하는데 c-a-b 순서로 배치한다. 역순이다.
+-->
+
+<!-- flex의 속성 중 1. 컨테이너에 적용하는 속성들_flex-flow
+
+.container {
+    flex-flow: row-wrap;
+    /* 아래의 두 줄을 줄여 쓴 것이다.
+    flex-direction: row
+    flex-wrap:wrap */
+}
+
+flex-direction과 flex-wrap을 한꺼번에 지정할 수 있는 단축 속성이다.
+-->
+
+<!--
+    justify는 메인축(오뎅꼬치) 방향으로 정렬
+    align은 수직축(오뎅을 뜯어내는) 방향으로 정렬
+-->
+
+<!-- flex의 속성 중 1. 컨테이너에 적용하는 속성들_메인축 방향 정렬: justify-content
+.container {
+    justify-content: flex-start;
+    /* justify-content: flex-end */
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+    /* justify-content: space-evenly; */
+
+}
+flex-start(기본값)은 아이템들을 시작점으로 정렬한다.
+flex-end: 아이템들을 끝점으로 정렬한다.
+space-between: 아이템들의 사이에 균일한 간격을 만들어준다.a---b---c
+space-around: 아이템들의 둘레에 균일한 간격을 만들어준다.-a--b--c-
+space-evenly: 아이템들의 사이와 양 끝에 균일한 간격을 만들어 준다.-a-b-c-
+-->
+
+<!-- flex의 속성 중 1. 컨테이너에 적용하는 속성들_수직축 방향 정렬: align-items
+
+.container {
+    align-items: stretch:
+    /* align-items: flex-start; */
+    /* align-items: flex-end; */
+    /* align-items: center; */
+    /* align-items: baseline; */
+}
+stretch(기본값)는 아이템들이 수직축 방향으로 끝까지 쭈욱 늘어난다.
+flex-start는 아이템들을 시작점으로 정렬한다.
+flex-end는 아이템들을 끝으로 정렬한다.
+center는 아이템들을 가운데로 정렬한다.
+baseline은 아이템들을 텍스테 베이스라인 기준으로 정렬한다.
+-->
+
+<!--flex의 속성 중 1.컨테이너에 적용하는 속성들_여러 행 정렬:align-content
+아이템들의 행이 2줄 이상 되었을 대의 수직축 방향 정렬을 결정하는 속성
+.container {
+    flex-wrap: wrap;
+    align-content: stretch;
+    /* align-content: flex-start; */
+    /* align-content: flex-end; */
+    /* align-content: center; */
+    /* align-content: space-between; */
+    /* align-content: space-around; */
+    /* align-content: spze-evenly; */
+
+}
+stretch는 a-b-아래c(늘어남, 화면 꽉 채움)
+flex-start는 a-b-아래c(원래 크기)
+flex-end는 하단에 다 배치
+center는 가운데  다 배치
+space-between은 상단 a-b 하단에 c만 배치
+space-around는 위칸 조금 뗀 a-b가 상단에, 아래칸에서 조금 뗀 c가 하단에 배치된다.
+space-between은 space-around보다 더 가운데에 몰린다.
+-->
+
+
+
+<!-- flex의 속성 중 2. Flex 아이템에 적용하는 속성들-->
+
+<!-- flex의 속성 중 2.Flex 아이템에 적용하는 속성들_유연한 박스의 기본 영역: flex-basis
+Flex 아이템의 기본 크기를 설정한다.
+.item {
+    flex-basis: auto; /*기본값 */
+    /* flex-basis: 0; */
+    /* flex-basis: 50%; */
+    /* flex-basis: 300px; */
+    /* flex-basis: 10rem; */
+    /* flex-basis: content; */
+}
+auto는 기본값으로 해당 아이템의 width값을 사용한다.
+width는 따로 설정하지 않으면 컨텐츠의 크기가 된다.
+
+.item {
+    flex-basis: 100px;
+}
+원래의 width(너비)가 100px이 안되는 a와 c는 100px로 늘어나고,
+원래 100px이 넘는 b는 그대로 유지된다.
+반면에 width: 100px을 넣으면 원래 100px이 넘는 b도 100px로 맞춰진다.
+-->
+
+<!-- flex의 속성 중 2.Flex 아이템에 적용하는 속성들_유연하게 늘리기: flex-grow
+아이템이 flex-basis의 값보다 커질 수 있는지를 결정하는 속성이다.
+원래의 크기보다 커지면 빈 공간으로 메우게 된다.
+.item {
+    flex-grow: 1;
+    /* flex-grow: 0; /* 기본값 */
+}
+flex-grow에 들어가는 숫자 의미는, 아이템들의 flex-basis를 제외한 
+여백 부분을 flex-grow에 지정된 숫자의 비율로 나누어 가진다.
+
+/* 1:2:1의 비율로 여백을 세팅할 경우 */
+.item:nth-child(1) { flex-grow: 1;}
+.item:nth-child(2) { flex-grow: 2;}
+.item:nth-child(3) { flex-grow: 1;}
+a--b----c--
+
+-->
+
+<!-- flex의 속성 중 2.Flex 아이템에 적용하는 속성들_유연하게 줄이기: flex-shrink
+아이템이 flex-basis의 값보다 작아질 수 잇는지를 결정한다
+
+.item {
+    flex-basis: 150px;
+    felx-shrink: 1; /*기본값*/
+}
+
+
+.item {
+    flex: 1;
+    /* flex-grow: 1; flex-shrink: 1; flex-basis: 0%; */
+    flex: 1 1 auto;
+    /* flex-grow: 1; felx-shrink: 1; flex-basis: auto; */
+    flex: 1 500px:
+    /*flex-grow: 1; flex-shrink: 1; flex-basis: 500px; */
+}
+-->
+
+<!-- flex의 속성 중 2.Flex 아이템에 적용하는 속성들_수직축으로 아이템 정렬: align-self
+align-items는 전체 아이템의 수직축 방향 정렬
+align-self는 해당 아이템의 수직축 방향 정렬
+.item {
+    align-self: quto;
+    /* align-self: stretch; */
+    /* align-self: flex-start; */
+    /* align-self: flex-end; */
+    /* align-self: center; */
+    /* align-self: baseline; */
+}
+기본값은 auto, 기본적으로 align-items 설정을 상속 받는다.
+각각의 개별 설정이 전체 설정 보다 우선이다.
+-->
+
+<!--flex의 속성 중 2.Flex 아이템에 적용하는 속성들_배치 순서: order와 z-index
+order 
+각 아이템들의 시각적 나열 순서를 결정하는 속성이다.
+작은 숫자일 수록 먼저 배치된다.
+주의! HTML 자체 구조를 변경하는 것은 아니다.
+. item:nth-child(1) { order: 3; } /*a*/
+. item:nth-child(2) { order: 1; } /*b*/
+. item:nth-child(3) { order: 2; } /*c*/
+출력: b-c-a
+
+z-index로 z축 정렬을 할 수 있다.
+숫자가 클 수록 위로 올라온다.
+.item:nth-child(2) {
+    z-index: 1;
+    transform: scale(2);
+}
+
+z인덱스를 설정 안하면 0이므로, 1만 설정해도 나머지 아이템 보다 위로 올라온다.
+출력: b가 a,c보다 위에 겹쳐보임
+-->
+
+<!--개구리 24단계
+flex-wrap: wrap-reverse;
+flex-direction: column-reverse;
+justify-content:center;
+align-content: space-between
+-->

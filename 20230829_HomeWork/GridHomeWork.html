@@ -1,0 +1,278 @@
+<!--Grid는 두 방향(가로-세로) 레이아웃 시스템(2차원)-->
+
+<!--
+<div class="container">
+    <link rel="stylesheet" href="./20230829_FlexGridCss.css">
+    <div class="item">A</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+    <div class="item">D</div>
+    <div class="item">E</div>
+    <div class="item">F</div>
+    <div class="item">G</div>
+    <div class="item">H</div>
+    <div class="item">I</div>
+</div>
+-->
+<!--
+.container {
+    display: grid;
+}
+-->
+
+<!-- 
+그리드의 속성들은 
+1. 컨테이너에 적용하는 속성
+2. 아이템에 적용하는 속성으로 나누어진다.
+-->
+
+<!-- 1. 컨테이너에 적용하는 속성__ display: grid;
+
+.container {
+    display: grid;
+    /* display: inline-grid; => 컨테이너가 주변 요소들과 어떻게 어우러질지 결정하는 값*/
+} 
+
+-->
+
+<!-- 1.컨테이너에 적용하는 속성__그리드 형태 정의: grid-template-rows, grid-rempalte-columns
+.container {
+    grid-template-columns: 200px 200px 500px;
+    /* grid-template-columns: 1fr 1fr 1fr */
+    /* grid-template-columns: reapeat(3, 1fr) */
+    /* grid-template-columns: 200px 1fr */
+    /* grid-template-columns: 100px 200px auto */
+
+    grid-template-rows: 200px 200px 500px;
+    /* grid-template-rows: 1fr 1fr 1fr */
+    /* grid-template-rows: reapeat(3, 1fr) */
+    /* grid-template-rows: 200px 1fr */
+    /* grid-template-rows: 100px 200px auto */
+} 
+
+grid-template-rows는 행(row)의 배치
+grid-template-columns는 열(column)의 배치
+
+fr은 fraction으로 일부를 뜻한다.
+1fr 1fr 1fr은 균일하게 1:1:1 비율인 3개의 column을 만들겠다는 의미이다.
+
+repeat 함수
+repeat는 반복되는 값을 자동으로 처리할 수 있는 함수이다
+repeat(반복횟수, 반복값)
+repeat(5, 1fr) => 1fr 1fr 1fr 1fr 1fr과 같다. 1:1:1:1:1
+repeat(3, 1fr 4fr 2fr) => 도 가능하다.
+
+minmax 함수
+최솟값과 최댓값을 지정할 수 있는 함수
+minmax(100px, auto)의 의미는 최소한 100px, 최대는 자동으로(auto) 늘어나게 이다.
+minmax(최대, 최소)
+.container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, minmax(100px, auto));
+}
+
+auto-fill과 auto-fit
+.container {
+    grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+}
+auto-fill의 크기를 20%로 설정했으므로, 1개의 row에는 5개의 셀이 들어간다.
+a,b,c,d,e
+f,g,h,i,j
+k,l,m,n
+셀의 개수가 5개보다 모자라면 a,b,c,d,- 이런 식으로 공간이 남는다.
+auto-fit을 사용한다면...넘눈 공간을 채운다.a,b,c,d
+
+간격 만들기 row-gap, column-gap, gap
+그리드 셀 사이의 간격을 설정한다.
+.container {
+    row-gap: 10px;
+    /* row의 간격을 10px로 */
+    column-gap: 20px;
+    /* column의 간격을 20px로 */
+}
+
+.container {
+    gap: 10px 20px;
+    /* row-gap: 10px; column-gap: 20px; */
+}
+
+.container {
+    gap: 20px;
+    /* row-gap: 20px; column-gap: 20px; */
+}
+
+
+그리드 형태를 자동으로 정의
+grid-auto-columns
+grid-auto-rows
+
+.container {
+    grid-auto-rows: minmax(100px, auto);
+}
+row 개수를 미리 알 수 없는 경우
+
+-->
+
+<!-- 1.컨테이너에 적용하는 속성__ 각 셀의 영역 지정
+grid-column-start
+grid-column-end
+grid-column
+grid-row-start
+grid-row-end
+grid-row
+
+.item: nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.item:nth-child(1) {
+    grid-column: 1/3;
+    grid-row: 1/2;
+}
+위 둘의 코드는 같은 곳을 가르킨다.
+
+몇 개의 셀을 차지하게 할 것인지도 지정해 줄 수 있다.
+.item: nth-child(1) {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 3;
+}
+------------------------------------------------------------
+.container {
+    grid-template-columns: 50px;
+    grid-auto-columns: 1fr 2fr;
+}
+.item:nth-child(1) { grid-column: 2; }
+.item:nth-child(2) { grid-column: 3; }
+.item:nth-child(3) { grid-column: 4; }
+.item:nth-child(4) { grid-column: 5; }
+.item:nth-child(5) { grid-column: 6; }
+.item:nth-child(6) { grid-column: 7; }
+
+첫번째 column(G)만 grid-template-columns의 통제를 받아 50px로 되고,
+나머지 column들은 grid-auto-columns의 규칙에 따라 1:2의 비율이 반복된다.
+-->
+
+<!-- 영역 이름으로 그리드 정의: grid-template-areas
+각 영역에 이름을 붙이고, 그 이름을 이용해서 배치하는 방법
+.container {
+    grid-template-areas:
+        " header header header"
+        "a  main    b"
+        ".  .   ."
+        "footer footer  footer"
+}
+
+자동 배치:grid-auto-flow
+아이템이 자동 배치되는 흐름을 결정하는 속성
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+    grid-template-rows: repeat(5, minmax(50px, auto));
+    grid-quto-flow: dense;
+}
+item.nth-child(2) { grid-column: auto / span 3;}
+/*2는 두번째 그리드를 뜻함 3은 셀을 3개를 점유해라*/
+item.nth-child(5) { grid-column: auto / span 3;}
+item.nth-child(7) { grid-column: auto / span 2;}
+아이템이 row를 기준으로 순서대로 배치가 되다가
+들어갈 자리가 없으면 그 칸은 비워두고 아래로 배치가 된다.
+
+-->
+
+<!-- 정렬
+
+세로 방향 정렬
+align-items
+아이템들을 세로(column축) 방향으로 정렬한다. 컨테이너에 적용한다.
+. container {
+    align-items: stretch:
+    /* align-items: start; */
+    /* align-items: center; */
+    /* align-items: end; */
+} 
+
+가로 방향 정렬
+아이템들을 가로(row축) 방향으로 정렬한다. 컨테이너에 적용한다.
+.container {
+    justify-items: stretch;
+    /* justify-items: center; */
+    /* justify-items: end; */
+}
+
+위 두개를 합친것
+place-items
+align-items와 justify-items를 같이 쓸 수 있는 단축 속성이다
+.container {
+    place-items: center start;
+}
+
+아이템 그룹 세로 정렬
+align-content
+Grid 아이템들의 높이를 모두 합한 값이 Grid 컨테이너의 높이보다 작을 때
+Grid 아이템들을 통째로 정렬한다.
+.container {
+    align-content: stretch;
+    /* align-content: start; */
+    /* align-content: center; */
+    /* align-content: end; */
+    /* align-content: space-between; */
+    /* align-content: space-around; */
+    /* align-content: space-evenly; */
+}
+
+아이템 그룹 가로 정렬
+justify-content
+Grid 아이템들의 너비를 모두 합한 값이 Grid 컨테이너의 너비보다 작을 때 
+Grid 아이템들을 통째로 정렬한다.
+.container {
+    justify-content: stretch;
+    /* justify-content: start; */
+    /* justify-content: center; */
+    /* justify-content: end; */
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+    /* justify-content: space-evenly; */
+}
+
+place-content
+align-content와 justify-content를 같이 쓸 수 있는 단축 속성이다
+.container {
+    place-content: space-between center;
+}
+
+-->
+<!--
+개별 아이템 세로 정렬 align-self
+해당 아이템을 세로(column축) 방향으로 정렬한다. 아이템에 적용한다.
+.item {
+    align-self: stretch:
+    /* align-self: start; */
+    /* align-self: center; */
+    /* align-self: end; */
+}
+
+개별 아이템 가로 정렬
+justify-self
+해당 아이템을 가로(row축) 방향으로 정렬한다. 아이템에 적용한다.
+.item {
+    justify-self: stretch;
+    /* justify-self: start; */
+    /* justify-self: center; */
+    /* justify-self: end; */
+}
+
+배치 순서 order
+각 아이템들의 시각적 나열 순서를 결정하는 속성이다
+.item:nth-child(1) { order: 3; } 
+.item:nth-child(2) { order: 1; } 
+.item:nth-child(3) { order: 2; } 
+
+z-index
+z축 정렬(숫자가 클 수록 위로 올라온다.)
+.item:nth-child(5) {
+    z-index: 1;
+    transform: scale(2);
+}
+-->

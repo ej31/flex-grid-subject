@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> CSS EXample</title>
+        <style>
+            .container {
+                display:flex;
+                flex-direction: column;
+                height: 100vh;
+                background-color: #f7f7f7;
+                padding: 20px;
+            }
+
+            .header {
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .content {
+                flex: 1;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-top: 20px;
+            }
+
+            .footer {
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Header</h1>
+            </div>
+            <div class="content">
+                <h2>Content</h2>
+                <p>Halooooo dfkdkfapjfiejfiesnvirjgiwj</p>
+            </div>
+            <div class="footer">
+                <p>Footer</p>
+            </div>
+        </div>
+    </body>
+</html>
